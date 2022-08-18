@@ -1,0 +1,8 @@
+<div class="repo">
+    <a [href]="repo?.html_url" class="link"><fa-icon [icon]="faLink"></fa-icon></a>
+    <h2 class="name">{{repo?.name}}</h2>
+    <p class="description">{{repo?.description}}</p>
+    <div class="languages">
+        <span *ngFor="let lang of languages">{{lang}}</span>
+    </div>
+</div>

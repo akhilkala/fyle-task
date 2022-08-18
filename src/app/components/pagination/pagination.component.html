@@ -1,0 +1,11 @@
+<div class="pagination">
+    <div (click)="handlePageDecrement()" [class]="{button: true, 'button--disabled': currentPage===1}">
+        <fa-icon [icon]="faLeftArrow"></fa-icon>
+    </div>
+    <div *ngFor="let _ of [].constructor(numberOfPages); let i = index" [class]="{button: true, 'button--selected': currentPage===i+1}" (click)="handlePageSet(i+1)">
+       {{i+1}}
+    </div>
+    <div (click)="handlePageIncrement()" [class]="{button: true, 'button--disabled': currentPage===numberOfPages}">
+        <fa-icon [icon]="faRightArrow"></fa-icon>
+    </div>
+</div>

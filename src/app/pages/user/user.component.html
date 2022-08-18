@@ -1,0 +1,45 @@
+<app-loading [screenCenter]="true" *ngIf="loading"></app-loading>
+
+<div *ngIf="!loading" class="user">
+    <header class="header">
+        <div class="left">
+            <img class="profile-picture" [src]="user?.avatar_url" [alt]="user?.name">
+          </div>
+        <div class="right">
+            <h2>{{user?.name ? user?.name : user?.login}}</h2>
+            <h3 *ngIf="user?.name">{{user?.login}}</h3>
+            <p *ngIf="!user?.bio" class="bio">{{"Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic sint nulla, illum accusamus aspernatur eius magni suscipit mollitia pariatur deserunt labore ab a quasi? Consectetur ipsam distinctio saepe doloremque maxime."}}</p>
+            <div class="links">
+              <div *ngIf="user?.location" class="link">
+                <fa-icon [icon]="faMapPin"></fa-icon>
+                <span>{{user?.location}}</span>
+              </div>
+              <div *ngIf="user?.twitter_username" class="link">
+                <fa-icon [icon]="faTwitter"></fa-icon>
+                <a [href]="'https://twitter.com/'+user?.twitter_username">{{user?.twitter_username}}</a>
+              </div>
+              <div *ngIf="user?.email" class="link">
+                <fa-icon [icon]="faEnvelope"></fa-icon>
+                <a [href]="'mailto:'+user?.email">{{user?.email}}</a>
+              </div>
+            </div>
+          </div>
+      </header>
+      <aside>
+        <div class="left">
+          <fa-icon [icon]="faExternalLink"></fa-icon>
+          <a target="_blank" [href]="user?.html_url">{{user?.html_url}}</a>
+        </div>
+        <div (click)="handleChangeOrder()" class="right">
+          <fa-icon [icon]="faSortDown"></fa-icon>
+          <span>{{newestFirst ? 'Newest First' : 'Oldest first'}}</span>
+        </div>
+      </aside>
+      <div *ngIf="reposLoading" class="cards--loading"><app-loading></app-loading></div>
+      <div *ngIf="!reposLoading" class="cards">
+        <app-repo-card [username]="username" [repo]="repo" *ngFor="let repo of repos"></app-repo-card>
+      </div>
+      <footer class="footer">
+        <app-pagination [currentPage]="currentPage" [numberOfPages] = "user?.number_of_pages" (onPageChange)="handlePageChange($event)"></app-pagination>
+      </footer>
+</div>

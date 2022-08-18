@@ -1,0 +1,37 @@
+.repo {
+    border: 1px solid #333;
+    border-radius: 3px;
+    margin: 1rem .5rem;
+    padding: .75rem;
+    position: relative;
+    min-height: 10rem;
+    h2 {
+        font-size: 1.2rem;
+    }
+    .description {
+        margin-top: 1rem;
+    }
+    .link {
+        position: absolute;
+        top: .75rem;
+        right: .75rem;
+        transition: .2s all;
+        &:hover {
+            color: #0092ca;
+        }
+    }
+    .languages {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -.25rem;
+        margin-top: 1rem;
+        span {
+            background-color: #0092ca;
+            color: #fff;
+            margin: .25rem;
+            padding: .25rem .5rem;
+            border-radius: 3px;
+            height: max-content;
+        }
+    }
+} 
