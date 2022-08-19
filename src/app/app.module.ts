@@ -11,10 +11,11 @@ import { UserComponent } from './pages/user/user.component';
 import { RepoCardComponent } from './components/repo-card/repo-card.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { HomeComponent } from './pages/home/home.component';
-
-import player from 'lottie-web';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ErrorComponent } from './components/error/error.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+
+import player from 'lottie-web';
 
 const routes: Routes = [
   {
@@ -26,8 +27,12 @@ const routes: Routes = [
     component: ErrorComponent,
   },
   {
-    path: ':username',
+    path: 'user/:username',
     component: UserComponent,
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 
@@ -40,6 +45,7 @@ const routes: Routes = [
     HomeComponent,
     LoadingComponent,
     ErrorComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

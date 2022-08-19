@@ -8,7 +8,8 @@ import {
   faSort,
 } from '@fortawesome/free-solid-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -31,13 +32,20 @@ export class UserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   private fetchRepos(pageNumber: number, ascending = false) {
     this.reposLoading = true;
     this.userService
       .getUserRepos(this.username, pageNumber, ascending)
+      .pipe(
+        catchError((error) => {
+          this.router.navigate(['error']);
+          return throwError(() => error);
+        })
+      )
       .subscribe((repos) => {
         this.repos = repos;
         this.reposLoading = false;
@@ -49,6 +57,16 @@ export class UserComponent implements OnInit {
     this.fetchRepos(this.currentPage);
     this.userService
       .getUserDetails(this.username)
+      .pipe(
+        catchError((error) => {
+          if (error.error.message === 'Not Found')
+            this.router.navigate(['error'], {
+              state: { message: 'User not found' },
+            });
+          else this.router.navigate(['error']);
+          return throwError(() => error);
+        })
+      )
       .subscribe((user: IUserDetails) => {
         this.user = user;
         this.loading = false;

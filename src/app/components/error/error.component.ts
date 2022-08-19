@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
@@ -13,7 +14,11 @@ export class ErrorComponent implements OnInit {
     loop: false,
   };
 
-  constructor() {}
+  constructor(private router: Router) {
+    //@ts-ignore
+    const message = this.router.getCurrentNavigation()?.extras.state.message;
+    if (message) this.message = message;
+  }
 
   ngOnInit(): void {}
 }

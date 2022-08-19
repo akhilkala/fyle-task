@@ -1,0 +1,16 @@
+.not-found {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    .blue {
+        color: #0092ca;
+        border-right: 2px solid #444;
+        padding-right: 1rem;
+    }
+    span {
+        font-weight: bold;
+        font-size: 2rem;
+    }
+}

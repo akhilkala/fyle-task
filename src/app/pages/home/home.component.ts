@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {}
 
   handleSubmit() {
-    this.router.navigate([this.username]);
-    console.log(this.username);
+    this.router.navigate(['user', this.username]);
   }
 }
